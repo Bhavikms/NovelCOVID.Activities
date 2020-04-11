@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" this:Main.ForCountry="India" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property sap2010:Annotation.AnnotationText="Returns result in form of Json Object." Name="Result" Type="OutArgument(njl:JObject)" />
     <x:Property sap2010:Annotation.AnnotationText="Enter name of country to get historical data." Name="ForCountry" Type="InArgument(x:String)">
@@ -10,7 +10,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1149,870</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>691,970</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -59,6 +59,7 @@
       <AssemblyReference>Newtonsoft.Json</AssemblyReference>
       <AssemblyReference>System.ValueTuple</AssemblyReference>
       <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Sequence sap2010:Annotation.AnnotationText="Get contry specific historical data from the start of 2020." DisplayName="Get country specific historical data" sap:VirtualizedContainerService.HintSize="701,805" sap2010:WorkflowViewState.IdRef="Sequence_1">
@@ -79,13 +80,13 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <TryCatch.Try>
-        <Sequence sap:VirtualizedContainerService.HintSize="621,455" sap2010:WorkflowViewState.IdRef="Sequence_6">
+        <Sequence sap:VirtualizedContainerService.HintSize="797,516" sap2010:WorkflowViewState.IdRef="Sequence_6">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:HttpClient Body="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" Password="{x:Null}" ResourcePath="{x:Null}" ResponseHeaders="{x:Null}" StatusCode="{x:Null}" Username="{x:Null}" AcceptFormat="JSON" sap2010:Annotation.AnnotationText="Call api to get data" BodyFormat="application/xml" ClientCertificate="[Nothing]" ClientCertificatePassword="[Nothing]" DisplayName="HTTP Request" EndPoint="[&quot;https://corona.lmao.ninja/v2/historical/&quot; + ForCountry]" sap:VirtualizedContainerService.HintSize="579,53" sap2010:WorkflowViewState.IdRef="HttpClient_1" Method="GET" Result="[Response]" TimeoutMS="6000">
+          <ui:HttpClient Body="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" Password="{x:Null}" ResourcePath="{x:Null}" ResponseHeaders="{x:Null}" StatusCode="{x:Null}" Username="{x:Null}" AcceptFormat="JSON" sap2010:Annotation.AnnotationText="Call api to get data" BodyFormat="application/xml" ClientCertificate="[Nothing]" ClientCertificatePassword="[Nothing]" DisplayName="HTTP Request" EndPoint="[&quot;https://corona.lmao.ninja/v2/historical/&quot; + ForCountry]" sap:VirtualizedContainerService.HintSize="755,53" sap2010:WorkflowViewState.IdRef="HttpClient_1" Method="GET" Result="[Response]" TimeoutMS="6000">
             <ui:HttpClient.Attachments>
               <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
             </ui:HttpClient.Attachments>
@@ -107,7 +108,7 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ui:HttpClient>
-          <If sap2010:Annotation.AnnotationText="Confirm response data is available before processing further." Condition="[String.IsNullOrWhiteSpace(Response)]" sap:VirtualizedContainerService.HintSize="579,270" sap2010:WorkflowViewState.IdRef="If_1">
+          <If sap2010:Annotation.AnnotationText="Confirm response data is available before processing further." Condition="[String.IsNullOrWhiteSpace(Response)]" sap:VirtualizedContainerService.HintSize="755,331" sap2010:WorkflowViewState.IdRef="If_1">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -119,11 +120,10 @@
               <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Error" Message="[&quot;Unable to connect to the remote server. Please try again later.&quot;]" />
             </If.Then>
             <If.Else>
-              <Sequence DisplayName="Populate out parameters" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_3">
+              <Sequence sap:VirtualizedContainerService.HintSize="376,152" sap2010:WorkflowViewState.IdRef="Sequence_7">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
                 <ui:DeserializeJson x:TypeArguments="njl:JObject" DisplayName="Deserialize JSON" sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_1" JsonObject="[Result]" JsonString="[Response]" />
